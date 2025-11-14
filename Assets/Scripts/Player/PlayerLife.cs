@@ -13,7 +13,20 @@ public class PlayerLife : MonoBehaviour
         anim= GetComponent<Animator>();
         rb= GetComponent<Rigidbody2D>();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+            Health health = this.GetComponent<Health>();
+            health.Damage(50);
+        }
+        if(transform.position.y < -10f)
+        {
+            Health health = this.GetComponent<Health>();
+            health.Damage(100);
+        }
+    }
+/*    private void OnCollisionTrigger2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Trap"))
         {
@@ -25,7 +38,7 @@ public class PlayerLife : MonoBehaviour
             Health health = this.GetComponent<Health>();
             health.Damage(100);
         }    
-    }
+    }*/
 
     public void Die()
     {
